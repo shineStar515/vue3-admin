@@ -2,7 +2,6 @@
 export interface Result {
 	code: string;
 	msg: string;
-	// data?: any;
 }
 
 // * 请求响应参数(包含data)

@@ -5,6 +5,8 @@ import router from "./router";
 import pinia from "@/stores";
 import * as Icons from "@element-plus/icons-vue";
 import "normalize.css";
+import "@/styles/config.css";
+import "element-plus/dist/index.css";
 const app = createApp(App);
 // 注册element Icons组件
 Object.keys(Icons).forEach(key => {
