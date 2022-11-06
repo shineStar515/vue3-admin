@@ -20,9 +20,6 @@ import FormLogin from "@/views/login/cpns/form-login.vue";
 </script>
 <style scoped lang="less">
 .login-view {
-	position: absolute;
-	top: 0;
-	left: 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;

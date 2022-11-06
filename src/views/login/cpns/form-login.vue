@@ -17,7 +17,7 @@
 			</el-form-item>
 		</el-form>
 		<div class="login-btn">
-			<el-button :icon="Refresh" size="large" type="success" round>忘记密码</el-button>
+			<el-button :icon="Refresh" size="large" type="success" round @click="handleResetClick(formRef)">重置</el-button>
 			<el-button :icon="UserFilled" :loading="loading" size="large" type="success" round @click="handleLoginClick(formRef)"
 				>登录</el-button
 			>
@@ -31,10 +31,11 @@ import { useGlobalStore } from "@/stores";
 import md5 from "js-md5";
 import { ElMessage, ElNotification } from "element-plus";
 import type { FormRules, FormInstance } from "element-plus";
+import { useRouter } from "vue-router";
 //login data
 const loginForm = reactive({
-	username: "",
-	password: ""
+	username: "admin",
+	password: "123456"
 });
 //Rules
 const loginRules = reactive<FormRules>({
@@ -55,6 +56,7 @@ const loginRules = reactive<FormRules>({
 const formRef = ref<FormInstance>();
 const loading = ref(false);
 const globalStore = useGlobalStore();
+const router = useRouter();
 function handleLoginClick(formEl: FormInstance) {
 	if (!formEl) return;
 	formEl.validate(valid => {
@@ -70,6 +72,7 @@ function handleLoginClick(formEl: FormInstance) {
 					type: "success",
 					duration: 3000
 				});
+				router.push("/layout");
 			});
 		} catch (e) {
 			ElMessage({
@@ -81,6 +84,9 @@ function handleLoginClick(formEl: FormInstance) {
 		}
 	});
 	console.log("登录");
+}
+function handleResetClick(formEl: FormInstance) {
+	formEl.resetFields();
 }
 </script>
 <style scoped lang="less">
