@@ -11,78 +11,21 @@ export namespace ILogin {
 }
 /* 用户菜单 */
 export namespace IUser {
-	export type IUserMenu = Root2[];
-
-	export interface Root2 {
+	export type IUserMenu = MenuOptions[];
+	export interface MenuOptions {
 		path: string;
 		name: string;
-		component?: string;
-		meta: Meta;
+		component?: string | (() => Promise<any>);
 		redirect?: string;
-		children?: Children[];
+		meta: MetaProps;
+		children?: MenuOptions[];
 	}
-
-	export interface Meta {
+	interface MetaProps {
 		icon: string;
 		title: string;
 		isLink: string;
 		isHide: boolean;
-		isFull: boolean;
-		isAffix: boolean;
-		isKeepAlive: boolean;
-	}
-
-	export interface Children {
-		path: string;
-		name: string;
-		component?: string;
-		meta: Meta2;
-		redirect?: string;
-		children?: Children2[];
-	}
-
-	export interface Meta2 {
-		icon: string;
-		title: string;
-		isLink: string;
-		isHide: boolean;
-		isFull: boolean;
-		isAffix: boolean;
-		isKeepAlive: boolean;
-	}
-
-	export interface Children2 {
-		path: string;
-		name: string;
-		component?: string;
-		meta: Meta3;
-		redirect?: string;
-		children?: Children3[];
-	}
-
-	export interface Meta3 {
-		icon: string;
-		title: string;
-		isLink: string;
-		isHide: boolean;
-		isFull: boolean;
-		isAffix: boolean;
-		isKeepAlive: boolean;
-	}
-
-	export interface Children3 {
-		path: string;
-		name: string;
-		component: string;
-		meta: Meta4;
-	}
-
-	export interface Meta4 {
-		icon: string;
-		title: string;
-		isLink: string;
-		isHide: boolean;
-		isFull: boolean;
+		isFull?: boolean;
 		isAffix: boolean;
 		isKeepAlive: boolean;
 	}

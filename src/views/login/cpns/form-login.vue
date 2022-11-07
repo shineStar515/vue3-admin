@@ -32,6 +32,7 @@ import md5 from "js-md5";
 import { ElMessage, ElNotification } from "element-plus";
 import type { FormRules, FormInstance } from "element-plus";
 import { useRouter } from "vue-router";
+import { initDynamicRoutes } from "@/router/modules/dynamicRoutes";
 //login data
 const loginForm = reactive({
 	username: "admin",
@@ -72,6 +73,8 @@ function handleLoginClick(formEl: FormInstance) {
 					type: "success",
 					duration: 3000
 				});
+				//添加动态路由
+				initDynamicRoutes();
 				router.push("/layout");
 			});
 		} catch (e) {

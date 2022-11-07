@@ -10,6 +10,7 @@ export const useGlobalStore = defineStore("globalStore", {
 		token: "",
 		userMenu: []
 	}),
+
 	actions: {
 		//set token
 		setToken(value: string) {
