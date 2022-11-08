@@ -40,4 +40,8 @@ function handleClickMenu(menu: any) {
 	router.push(menu.path);
 }
 </script>
-<style scoped></style>
+<style scoped>
+.menu {
+	border-right: #282a35;
+}
+</style>
