@@ -13,6 +13,8 @@
 	justify-content: center;
 	width: 100%;
 	height: 100%;
+	background-color: #fff;
+	border-radius: 10px;
 	.home-bg {
 		width: 70%;
 		margin-bottom: 20px;
