@@ -36,12 +36,14 @@ declare module '@vue/runtime-core' {
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElSwitch: typeof import("element-plus/es")["ElSwitch"]
-    ElTableColumn: typeof import("element-plus/es")["ElTableColumn"]
+    ElTable: typeof import('element-plus/es')['ElTable']
+    ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTag: typeof import("element-plus/es")["ElTag"]
     FormItem: typeof import('./src/components/search-form/cpns/form-item.vue')['default']
     ProTable: typeof import('./src/components/proTable/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchForm: typeof import('./src/components/search-form/index.vue')['default']
+    TablePage: typeof import('./src/components/table-page/index.vue')['default']
   }
 }

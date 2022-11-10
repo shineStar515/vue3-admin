@@ -1,7 +1,7 @@
 <template>
 	<div class="search-form">
 		<el-form class="form" label-width="100px" :model="searchParam">
-			<el-row :gutter="10">
+			<el-row :gutter="5">
 				<template v-for="formItem in searchFormConfig.formList" :key="formItem.label">
 					<el-col :span="8">
 						<el-form-item :label="`${formItem.label} :`">

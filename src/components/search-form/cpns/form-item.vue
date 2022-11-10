@@ -6,7 +6,7 @@
 		</template>
 		<!--		下拉框   -->
 		<template v-if="formItem.type === 'select'">
-			<el-select v-bind="formItem">
+			<el-select v-bind="formItem" v-model="searchParam[formItem.value]">
 				<template v-for="option in formItem.options" :key="option.label">
 					<el-option :label="option.label" :value="option.value" />
 				</template>
@@ -20,6 +20,7 @@
 				start-placeholder="开始时间"
 				end-placeholder="结束时间"
 				:shortcuts="shortcuts"
+				v-model="searchParam[formItem.value]"
 			/>
 		</template>
 	</div>

@@ -1,4 +1,4 @@
-import type { IProTable, ISearchFormConfig } from "@/components/proTable/types";
+import type { IProTable, ISearchFormConfig, ITableColumnConfig } from "@/components/proTable/types";
 
 const searchFormConfig: ISearchFormConfig = {
 	formList: [
@@ -37,5 +37,31 @@ const searchFormConfig: ISearchFormConfig = {
 		}
 	]
 };
-const tableDataConfig = null;
-export const proTableConfig: IProTable = { searchFormConfig, tableDataConfig };
+// 表格配置项
+const tableColumnConfig: ITableColumnConfig = {
+	columns: [
+		{ type: "index", label: "序号", width: 80, fixed: "left" },
+		{ type: "selection", label: "#", width: 80 },
+		{ prop: "username", label: "用户姓名", width: 100 },
+		{
+			prop: "gender",
+			label: "性别",
+			width: 120
+		},
+		{ prop: "idCard", label: "身份证号", width: 100 },
+		{ prop: "email", label: "邮箱", width: 120 },
+		{ prop: "address", label: "居住地址", width: 120 },
+		{
+			prop: "status",
+			label: "用户状态",
+			width: 80
+		},
+		{
+			prop: "createTime",
+			label: "创建时间",
+			width: 200
+		},
+		{ prop: "operation", label: "操作", width: 300, fixed: "right" }
+	]
+};
+export const proTableConfig: IProTable = { searchFormConfig, tableColumnConfig };

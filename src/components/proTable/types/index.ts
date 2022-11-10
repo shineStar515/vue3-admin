@@ -1,7 +1,7 @@
 /* proTable */
 export interface IProTable {
 	searchFormConfig: ISearchFormConfig;
-	tableDataConfig: any;
+	tableColumnConfig: ITableColumnConfig;
 }
 // searchFormConfig
 export interface ISearchFormConfig {
@@ -27,4 +27,15 @@ export type SearchType =
 export interface IOption {
 	label: string;
 	value: string;
+}
+//tableColumnConfig
+export interface ITableColumnConfig {
+	columns: IColumnProperty[];
+}
+export interface IColumnProperty {
+	type?: string;
+	label?: string;
+	prop?: string;
+	width?: number;
+	fixed?: string;
 }

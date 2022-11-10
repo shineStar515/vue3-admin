@@ -11,20 +11,28 @@
 				</slot>
 			</div>
 		</div>
-		<div class="table-content">000</div>
+		<div class="table-content">
+			<table-page :table-column-config="tableColumnConfig" :table-data="tableData" />
+		</div>
 	</div>
 </template>
 <script setup lang="ts">
 import SearchForm from "@/components/search-form/index.vue";
+import TablePage from "@/components/table-page/index.vue";
 import { reactive, computed, defineProps } from "vue";
 import { Search, Refresh } from "@element-plus/icons-vue";
 import type { IProTable } from "@/components/proTable/types";
+import type { IUser } from "@/service/modules/proTable/types";
 
 interface IProTableProps {
 	proTableConfig: IProTable; // proTable配置文件
+	tableData: IUser.Datalist[];
 }
-const props = withDefaults(defineProps<IProTableProps>(), {});
+const props = withDefaults(defineProps<IProTableProps>(), {
+	tableData: () => []
+});
 const searchFormConfig = computed(() => props.proTableConfig.searchFormConfig);
+const tableColumnConfig = computed(() => props.proTableConfig.tableColumnConfig);
 
 //formData
 const formData = reactive({});
@@ -44,11 +52,12 @@ function resetSearch() {
 </script>
 <style scoped lang="less">
 .proTable {
+	box-sizing: border-box;
 	.table-search,
 	.table-content {
 		display: flex;
 		margin: 10px 0;
-		padding: 20px 10px 10px;
+		padding: 20px 0;
 		background-color: #fff;
 		border-radius: 10px;
 	}
