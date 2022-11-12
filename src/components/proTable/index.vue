@@ -12,12 +12,12 @@
 				</slot>
 			</div>
 		</div>
-		<!--		表格   -->
 		<div class="table-content">
-			<div class="table-page">
-				<el-table :data="tableData" border style="width: 95%" max-height="300">
+			<!--		表格   -->
+			<div class="page-table">
+				<el-table :data="tableData" border style="width: 95%" max-height="300" @selection-change="handleSelectionChange">
 					<!--		index   -->
-					<el-table-column v-if="tableColumnConfig.showIndexColumns" type="index" label="序号" width="60" align="center">
+					<el-table-column v-if="tableColumnConfig.showIndexColumns" type="index" fixed label="序号" width="60" align="center">
 					</el-table-column>
 					<!--		selection   -->
 					<el-table-column v-if="tableColumnConfig.showSelectionColumns" type="selection" width="60" align="center">
@@ -31,23 +31,31 @@
 						</el-table-column>
 					</template>
 				</el-table>
+				<!--		分页   -->
+				<div class="page-device-out">
+					<page-device />
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
 <script setup lang="ts">
-import SearchForm from "@/components/search-form/index.vue";
-import { reactive, computed, defineProps } from "vue";
+import SearchForm from "@/components/proTable/child/search-form/index.vue";
+import PageDevice from "@/components/proTable/child/page-device/index.vue";
+import { reactive, computed, defineProps, ref } from "vue";
 import { Search, Refresh } from "@element-plus/icons-vue";
 import type { IProTable } from "@/components/proTable/types";
 import type { IUser } from "@/service/modules/proTable/types";
+import { position } from "@/components/proTable/enums";
 
 interface IProTableProps {
 	proTableConfig: IProTable; // proTable配置文件
 	tableData: IUser.Datalist[]; //table数据
+	pageDevicePosition: position;
 }
 const props = withDefaults(defineProps<IProTableProps>(), {
-	tableData: () => []
+	tableData: () => [],
+	pageDevicePosition: position.right
 });
 //表单配置
 const searchFormConfig = computed(() => props.proTableConfig.searchFormConfig);
@@ -56,6 +64,12 @@ const tableColumnConfig = computed(() => props.proTableConfig.tableColumnConfig)
 
 //formData
 const formData = reactive({});
+//分页器位置
+const test = props.pageDevicePosition + "";
+console.log(test);
+const pagePosition = ref(
+	props.pageDevicePosition + "" == "right" ? "50%" : props.pageDevicePosition + "" == "left" ? "-50%" : ""
+);
 //默认搜索
 function defaultSearch() {
 	console.log("获取表单数据", formData);
@@ -69,18 +83,39 @@ function resetSearch() {
 	});
 	Object.assign(formData, obj);
 }
+//多选
+function handleSelectionChange(users: any) {
+	console.log("多选", users);
+}
 </script>
 <style scoped lang="less">
 .proTable {
 	box-sizing: border-box;
-	.table-search,
-	.table-content {
+	.table-search {
 		display: flex;
 		justify-content: center;
 		margin: 10px 0;
-		padding: 20px 0;
+		padding: 20px 0 10px;
 		background-color: #fff;
 		border-radius: 10px;
+	}
+	.table-content {
+		display: flex;
+		flex-direction: column;
+		.page-table {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			margin: 10px 0;
+			padding: 20px 0 10px;
+			background-color: #fff;
+			border-radius: 10px;
+			.page-device-out {
+				padding: 10px;
+				transform: translateX(v-bind(pagePosition));
+			}
+		}
 	}
 	.slot-search {
 		display: flex;
@@ -88,12 +123,6 @@ function resetSearch() {
 		width: 120px;
 		height: 40px;
 		margin-left: 20px;
-	}
-	.table-page {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		padding: 10px;
 	}
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
 	<div class="table-box">
-		<pro-table :pro-table-config="proTableConfig" :table-data="tableList">
+		<pro-table :pro-table-config="proTableConfig" :table-data="tableList" page-device-position="right">
 			<template #search="{ searchData }">
 				<el-button :icon="Search" color="#009688" type="primary" @click="handleSearchClick(searchData)">搜索</el-button>
 			</template>

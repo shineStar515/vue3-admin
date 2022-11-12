@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import { defineProps } from "vue";
 import type { ISearchFormConfig } from "@/components/proTable/types";
-import FormItem from "@/components/search-form/cpns/form-item.vue";
+import FormItem from "@/components/proTable/child/search-form/cpns/form-item.vue";
 //propsType
 interface searchFormProps {
 	searchFormConfig: ISearchFormConfig;

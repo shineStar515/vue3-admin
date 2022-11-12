@@ -30,7 +30,7 @@ declare module '@vue/runtime-core' {
     ElMenuItemGroup: typeof import("element-plus/es")["ElMenuItemGroup"]
     ElOption: typeof import('element-plus/es')['ElOption']
     ElPageHeader: typeof import("element-plus/es")["ElPageHeader"]
-    ElPagination: typeof import("element-plus/es")["ElPagination"]
+    ElPagination: typeof import('element-plus/es')['ElPagination']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSelect: typeof import('element-plus/es')['ElSelect']
@@ -39,11 +39,12 @@ declare module '@vue/runtime-core' {
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTag: typeof import("element-plus/es")["ElTag"]
-    FormItem: typeof import('./src/components/search-form/cpns/form-item.vue')['default']
+    FormItem: typeof import('./src/components/proTable/child/search-form/cpns/form-item.vue')['default']
+    PageDevice: typeof import('./src/components/proTable/child/page-device/index.vue')['default']
     ProTable: typeof import('./src/components/proTable/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    SearchForm: typeof import('./src/components/search-form/index.vue')['default']
+    SearchForm: typeof import('./src/components/proTable/child/search-form/index.vue')['default']
     TablePage: typeof import('./src/components/table-page/index.vue')['default']
   }
 }
