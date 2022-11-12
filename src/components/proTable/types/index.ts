@@ -31,6 +31,8 @@ export interface IOption {
 //tableColumnConfig
 export interface ITableColumnConfig {
 	columns: IColumnProperty[];
+	showIndexColumns: boolean;
+	showSelectionColumns: boolean;
 }
 export interface IColumnProperty {
 	type?: string;
@@ -38,4 +40,5 @@ export interface IColumnProperty {
 	prop?: string;
 	width?: number;
 	fixed?: string;
+	slotName?: string;
 }
