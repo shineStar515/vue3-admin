@@ -32,11 +32,14 @@
 </template>
 <script setup lang="ts">
 import { useRouter } from "vue-router";
+import { useGlobalStore } from "@/stores";
 
 defineProps<{ menuList: any }>();
 const router = useRouter();
+const globalStore = useGlobalStore();
 function handleClickMenu(menu: any) {
 	console.log(menu);
+	globalStore.initRoute = menu.path;
 	router.push(menu.path);
 }
 </script>

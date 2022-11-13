@@ -98,6 +98,13 @@ function handleSelectionChange(users: any) {
 		padding: 20px 0 10px;
 		background-color: #fff;
 		border-radius: 10px;
+		.slot-search {
+			display: flex;
+			justify-content: flex-end;
+			width: 120px;
+			height: 40px;
+			margin-left: 20px;
+		}
 	}
 	.table-content {
 		display: flex;
@@ -116,13 +123,6 @@ function handleSelectionChange(users: any) {
 				transform: translateX(v-bind(pagePosition));
 			}
 		}
-	}
-	.slot-search {
-		display: flex;
-		justify-content: flex-end;
-		width: 120px;
-		height: 40px;
-		margin-left: 20px;
 	}
 }
 </style>

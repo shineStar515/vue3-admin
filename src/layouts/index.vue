@@ -8,7 +8,7 @@
 						<span v-show="!isCollapse">Vue3 Admin</span>
 					</div>
 					<el-menu
-						:default-active="activeMenu"
+						:default-active="globalStore.initRoute"
 						:router="false"
 						:collapse="isCollapse"
 						:collapse-transition="false"

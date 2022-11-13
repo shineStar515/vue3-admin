@@ -4,11 +4,13 @@ import { createPinia, defineStore } from "pinia";
 import { getUserMenuRequest, loginRequest } from "@/service/modules/login";
 import type { IGlobalStore } from "@/stores/types";
 import type { ILogin } from "@/service/modules/login/types";
+import { initDynamicRoutes } from "@/router/modules/dynamicRoutes";
 
 export const useGlobalStore = defineStore("globalStore", {
 	state: (): IGlobalStore => ({
 		token: "",
-		userMenu: []
+		userMenu: [],
+		initRoute: ""
 	}),
 
 	actions: {
@@ -26,6 +28,7 @@ export const useGlobalStore = defineStore("globalStore", {
 		async getUserMenuRequestAction() {
 			const { data: userMenuResultData } = await getUserMenuRequest();
 			this.userMenu = userMenuResultData;
+			initDynamicRoutes();
 		}
 	},
 	/* state持久化存储 */
