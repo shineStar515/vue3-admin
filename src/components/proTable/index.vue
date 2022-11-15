@@ -33,7 +33,17 @@
 				</el-table>
 				<!--		分页   -->
 				<div class="page-device-out">
-					<page-device />
+					<el-pagination
+						v-model:current-page="pageSize"
+						:page-sizes="[10, 20, 30, 40, 50]"
+						:small="true"
+						:disabled="false"
+						:background="false"
+						layout="total, sizes, prev, pager, next, jumper"
+						:total="total"
+						@size-change="handleSizeChange"
+						@current-change="handleCurrentChange"
+					/>
 				</div>
 			</div>
 		</div>
@@ -41,8 +51,7 @@
 </template>
 <script setup lang="ts">
 import SearchForm from "@/components/proTable/child/search-form/index.vue";
-import PageDevice from "@/components/proTable/child/page-device/index.vue";
-import { reactive, computed, defineProps, ref } from "vue";
+import { reactive, computed, defineProps, ref, watch } from "vue";
 import { Search, Refresh } from "@element-plus/icons-vue";
 import type { IProTable } from "@/components/proTable/types";
 import type { IUser } from "@/service/modules/proTable/types";
@@ -51,7 +60,10 @@ import { position } from "@/components/proTable/enums";
 interface IProTableProps {
 	proTableConfig: IProTable; // proTable配置文件
 	tableData: IUser.Datalist[]; //table数据
-	pageDevicePosition: position;
+	pageDevicePosition: position; //分页位置
+	total: number;
+	pageNum: number;
+	pageSize: number;
 }
 const props = withDefaults(defineProps<IProTableProps>(), {
 	tableData: () => [],
@@ -64,12 +76,7 @@ const tableColumnConfig = computed(() => props.proTableConfig.tableColumnConfig)
 
 //formData
 const formData = reactive({});
-//分页器位置
-const test = props.pageDevicePosition + "";
-console.log(test);
-const pagePosition = ref(
-	props.pageDevicePosition + "" == "right" ? "50%" : props.pageDevicePosition + "" == "left" ? "-50%" : ""
-);
+
 //默认搜索
 function defaultSearch() {
 	console.log("获取表单数据", formData);
@@ -86,6 +93,18 @@ function resetSearch() {
 //多选
 function handleSelectionChange(users: any) {
 	console.log("多选", users);
+}
+//分页器位置
+const pagePosition = ref(
+	props.pageDevicePosition + "" == "right" ? "50%" : props.pageDevicePosition + "" == "left" ? "-50%" : ""
+);
+//分页器事件
+const emits = defineEmits(["pageCurrentChangeClick", "pageSizeChangeClick"]);
+function handleSizeChange(value: number) {
+	emits("pageSizeChangeClick", value);
+}
+function handleCurrentChange(value: number) {
+	emits("pageCurrentChangeClick", value);
 }
 </script>
 <style scoped lang="less">

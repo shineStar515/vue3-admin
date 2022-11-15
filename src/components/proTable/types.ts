@@ -26,7 +26,7 @@ export type SearchType =
 	| "datetimerange";
 export interface IOption {
 	label: string;
-	value: string;
+	value: number;
 }
 //tableColumnConfig
 export interface ITableColumnConfig {

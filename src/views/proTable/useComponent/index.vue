@@ -1,6 +1,15 @@
 <template>
 	<div class="table-box">
-		<pro-table :pro-table-config="proTableConfig" :table-data="tableList" page-device-position="right">
+		<pro-table
+			:pro-table-config="proTableConfig"
+			:table-data="tableList"
+			:page-num="pageNum"
+			:page-size="pageSize"
+			:total="total"
+			page-device-position="right"
+			@pageSizeChangeClick="handleSizeChangeClick"
+			@pageCurrentChangeClick="handleCurrentChangeClick"
+		>
 			<template #search="{ searchData }">
 				<el-button :icon="Search" color="#009688" type="primary" @click="handleSearchClick(searchData)">搜索</el-button>
 			</template>
@@ -21,9 +30,29 @@ import { proTableConfig } from "./config/pro-table-config";
 import { Search, Refresh } from "@element-plus/icons-vue";
 import { useProTableStore } from "@/stores/pro-table";
 import { storeToRefs } from "pinia";
+import { reactive } from "vue";
+//请求table数据
+const proTableStore = useProTableStore();
+proTableStore.tableListRequestAction();
+const { total, pageSize, pageNum, tableList } = storeToRefs(proTableStore);
+const requestData: any = reactive({
+	pageSize: 1,
+	pageNum: 10,
+	type: 1,
+	sex: null,
+	name: "",
+	idCard: "",
+	email: "",
+	date: null
+});
 //搜索
 function handleSearchClick(searchData: any) {
-	console.log(searchData);
+	requestData.pageSize = 1;
+	requestData.pageNum = 10;
+	for (const key in searchData) {
+		requestData[key] = searchData[key];
+	}
+	proTableStore.tableListRequestAction(requestData);
 }
 //查看
 function handleQuickClick(row: any) {
@@ -37,9 +66,15 @@ function handleEditClick(row: any) {
 function handleRemoveClick(row: any) {
 	console.log("删除", row);
 }
-//请求table数据
-useProTableStore().tableListRequestAction();
-
-const { tableList } = storeToRefs(useProTableStore());
+//pageSize
+function handleSizeChangeClick(size: number) {
+	requestData.pageNum = size;
+	proTableStore.tableListRequestAction(requestData);
+}
+//pageNum
+function handleCurrentChangeClick(currentNum: number) {
+	requestData.pageSize = currentNum;
+	proTableStore.tableListRequestAction(requestData);
+}
 </script>
 <style scoped lang="less"></style>

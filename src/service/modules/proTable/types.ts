@@ -1,5 +1,5 @@
 export namespace IUser {
-	export interface IUserTableRequest {
+	export interface IUserTableResult {
 		datalist: Datalist[];
 		pageNum: any;
 		pageSize: any;

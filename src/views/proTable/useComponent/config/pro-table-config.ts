@@ -14,8 +14,8 @@ const searchFormConfig: ISearchFormConfig = {
 			value: "sex",
 			placeholder: "请选择用户性别",
 			options: [
-				{ label: "男", value: "man" },
-				{ label: "女", value: "woman" }
+				{ label: "男", value: 1 },
+				{ label: "女", value: 2 }
 			]
 		},
 		{
